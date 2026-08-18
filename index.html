@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sweet Crumb Atelier — Baked for Your Beautiful Moments</title>
+<meta name="description" content="Sweet Crumb Atelier is a premium patisserie crafting handcrafted celebration cakes, custom designs and desserts made with love.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/lucide@0.383.0/dist/umd/lucide.min.js"></script>
+<style>
+  :root{
+    --cocoa:#3A2020;
+    --cream:#FFF8F0;
+    --rose:#E8A6A1;
+    --gold:#D6B36A;
+    --ink:#241717;
+    --bg:#FDF4EC;
+    --cocoa-80: rgba(58,32,32,.8);
+    --hair: rgba(58,32,32,.12);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'DM Sans', sans-serif;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  h1,h2,h3,.serif{ font-family:'Playfair Display', serif; }
+  .script{ font-family:'Cormorant Garamond', serif; font-style:italic; }
+  .wrap{ max-width:1360px; margin:0 auto; padding:0 28px; }
+  a{ color:inherit; text-decoration:none; }
+  img{ display:block; max-width:100%; }
+  ::selection{ background:var(--rose); color:var(--cocoa); }
+
+  /* Reveal on scroll */
+  .reveal{ opacity:0; transform:translateY(28px); transition:opacity .8s cubic-bezier(.2,.7,.2,1), transform .8s cubic-bezier(.2,.7,.2,1); }
+  .reveal.in{ opacity:1; transform:translateY(0); }
+
+  /* ---------- NAV ---------- */
+  .nav{
+    position:sticky; top:0; z-index:100;
+    padding:26px 0;
+    transition:padding .35s ease, background .35s ease, box-shadow .35s ease;
+  }
+  .nav.scrolled{
+    padding:14px 0;
+    background:rgba(255,248,240,.86);
+    backdrop-filter:blur(14px);
+    box-shadow:0 1px 0 var(--hair);
+  }
+  .nav-inner{ display:flex; align-items:center; justify-content:space-between; }
+  .logo{ font-family:'Playfair Display', serif; font-size:22px; letter-spacing:.02em; font-weight:600; color:var(--cocoa); display:flex; align-items:center; gap:8px;}
+  .logo .dot{ color:var(--gold); }
+  .nav-center{ display:flex; gap:38px; }
+  .nav-center a{
+    font-size:13.5px; letter-spacing:.05em; text-transform:uppercase; color:var(--cocoa);
+    position:relative; padding-bottom:4px; opacity:.82;
+  }
+  .nav-center a::after{
+    content:""; position:absolute; left:0; bottom:0; width:0; height:1px; background:var(--gold);
+    transition:width .35s ease;
+  }
+  .nav-center a:hover{ opacity:1; }
+  .nav-center a:hover::after{ width:100%; }
+  .nav-right{ display:flex; align-items:center; gap:20px; }
+  .icon-btn{ color:var(--cocoa); opacity:.85; position:relative; cursor:pointer; }
+  .icon-btn:hover{ opacity:1; }
+  .cart-badge{
+    position:absolute; top:-7px; right:-9px; background:var(--rose); color:var(--cream);
+    font-size:10px; width:16px; height:16px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:600;
+  }
+  .btn{
+    display:inline-flex; align-items:center; gap:8px; justify-content:center;
+    padding:13px 26px; border-radius:999px; font-size:13.5px; letter-spacing:.04em; text-transform:uppercase;
+    font-weight:600; cursor:pointer; border:1px solid transparent; transition:transform .3s ease, background .3s ease, color .3s ease, box-shadow .3s ease;
+    white-space:nowrap;
+  }
+  .btn-primary{ background:var(--cocoa); color:var(--cream); }
+  .btn-primary:hover{ background:#2a1717; transform:translateY(-2px); box-shadow:0 10px 24px rgba(58,32,32,.25); }
+  .btn-outline{ border-color:var(--cocoa); color:var(--cocoa); background:transparent; }
+  .btn-outline:hover{ background:var(--cocoa); color:var(--cream); transform:translateY(-2px); }
+  .btn-gold{ background:var(--gold); color:var(--cocoa); }
+  .btn-gold:hover{ transform:translateY(-2px); box-shadow:0 10px 24px rgba(214,179,106,.35); }
+  .btn-sm{ padding:9px 18px; font-size:12px; }
+  .hamburger{ display:none; }
+
+  /* ---------- HERO ---------- */
+  .hero{ padding:56px 0 90px; position:relative; }
+  .hero-grid{ display:grid; grid-template-columns:1.05fr 1fr; gap:64px; align-items:center; }
+  .eyebrow{
+    font-size:12.5px; letter-spacing:.18em; text-transform:uppercase; color:var(--gold);
+    font-weight:700; display:flex; align-items:center; gap:10px; margin-bottom:22px;
+  }
+  .eyebrow::before{ content:""; width:26px; height:1px; background:var(--gold); }
+  .hero h1{
+    font-size:clamp(40px, 4.6vw, 66px); line-height:1.06; font-weight:600; color:var(--cocoa); margin:0 0 26px;
+    letter-spacing:-.01em;
+  }
+  .hero h1 em{ font-style:italic; color:var(--rose); }
+  .hero p.lead{ font-size:17.5px; line-height:1.7; color:rgba(36,23,23,.72); max-width:440px; margin:0 0 36px; }
+  .hero-actions{ display:flex; gap:16px; flex-wrap:wrap; }
+  .hero-visual{ position:relative; }
+  .hero-img-frame{
+    position:relative; border-radius:28px; overflow:hidden; aspect-ratio:4/4.6;
+    box-shadow:0 40px 70px -30px rgba(58,32,32,.35);
+  }
+  .hero-img-frame img{ width:100%; height:100%; object-fit:cover; transition:transform 1.4s ease; }
+  .hero-img-frame:hover img{ transform:scale(1.04); }
+  .rating-card{
+    position:absolute; left:-34px; bottom:34px; background:var(--cream); border-radius:18px;
+    padding:18px 22px; box-shadow:0 22px 45px -18px rgba(58,32,32,.3); display:flex; flex-direction:column; gap:4px;
+    animation:float 5s ease-in-out infinite;
+  }
+  .stars{ color:var(--gold); font-size:14px; letter-spacing:2px; }
+  .rating-card .big{ font-family:'Playfair Display',serif; font-size:17px; font-weight:600; color:var(--cocoa); }
+  .rating-card .small{ font-size:12px; color:rgba(36,23,23,.6); }
+  @keyframes float{ 0%,100%{ transform:translateY(0);} 50%{ transform:translateY(-12px);} }
+  .petal{ position:absolute; opacity:.55; animation:float 7s ease-in-out infinite; }
+
+  /* ---------- STRIP ---------- */
+  .strip{ border-top:1px solid var(--hair); border-bottom:1px solid var(--hair); padding:38px 0; }
+  .strip-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:30px; }
+  .strip-item{ display:flex; gap:14px; align-items:flex-start; }
+  .strip-item .ic{ color:var(--gold); flex:none; margin-top:2px; }
+  .strip-item h4{ font-size:14.5px; margin:0 0 4px; font-weight:700; letter-spacing:.01em; }
+  .strip-item p{ font-size:13px; margin:0; color:rgba(36,23,23,.6); line-height:1.5; }
+
+  /* ---------- SECTION HEADING ---------- */
+  .section{ padding:110px 0; }
+  .section-head{ max-width:640px; margin:0 auto 56px; text-align:center; }
+  .section-head .eyebrow{ justify-content:center; }
+  .section-head .eyebrow::before{ display:none; }
+  .section-head h2{ font-size:clamp(30px,3.4vw,44px); color:var(--cocoa); margin:0 0 16px; font-weight:600; }
+  .section-head p{ color:rgba(36,23,23,.65); font-size:16px; line-height:1.7; margin:0; }
+  .section-head.left{ text-align:left; margin:0 0 50px; }
+  .section-head.left .eyebrow{ justify-content:flex-start; }
+
+  /* ---------- PRODUCT GRID ---------- */
+  .product-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:26px; }
+  .card{
+    background:var(--cream); border-radius:22px; overflow:hidden; position:relative;
+    box-shadow:0 1px 0 var(--hair);
+    transition:transform .45s cubic-bezier(.2,.7,.2,1), box-shadow .45s ease;
+  }
+  .card:hover{ transform:translateY(-8px); box-shadow:0 30px 50px -24px rgba(58,32,32,.28); }
+  .card-img{ position:relative; aspect-ratio:1/1.02; overflow:hidden; }
+  .card-img img{ width:100%; height:100%; object-fit:cover; transition:transform .7s ease; }
+  .card:hover .card-img img{ transform:scale(1.09); }
+  .fav{
+    position:absolute; top:14px; right:14px; width:36px; height:36px; border-radius:50%;
+    background:rgba(255,248,240,.9); display:flex; align-items:center; justify-content:center; color:var(--cocoa);
+    cursor:pointer; transition:background .3s ease, color .3s ease, transform .3s ease;
+  }
+  .fav:hover{ transform:scale(1.08); }
+  .fav.active{ color:var(--rose); }
+  .card-body{ padding:20px 20px 22px; }
+  .card-top{ display:flex; justify-content:space-between; align-items:flex-start; gap:8px; margin-bottom:6px;}
+  .card-body h3{ font-size:18px; margin:0; font-weight:600; color:var(--cocoa); }
+  .card-rate{ font-size:12px; color:var(--gold); white-space:nowrap; display:flex; align-items:center; gap:3px; }
+  .card-body p{ font-size:13.5px; color:rgba(36,23,23,.6); line-height:1.5; margin:0 0 16px; }
+  .card-foot{ display:flex; align-items:center; justify-content:space-between; }
+  .price{ font-family:'Playfair Display',serif; font-weight:600; font-size:18px; color:var(--cocoa); }
+  .add-btn{
+    display:flex; align-items:center; gap:7px; padding:10px 16px; border-radius:999px; background:var(--cocoa); color:var(--cream);
+    font-size:12px; letter-spacing:.04em; text-transform:uppercase; font-weight:600; cursor:pointer; border:none;
+    opacity:.92; transition:opacity .3s ease, background .3s ease, transform .3s ease;
+  }
+  .add-btn:hover{ opacity:1; background:var(--rose); color:var(--cocoa); transform:translateY(-1px); }
+
+  /* ---------- SIGNATURE ---------- */
+  .signature{ display:grid; grid-template-columns:.95fr 1.05fr; gap:70px; align-items:center; }
+  .sig-img{ border-radius:26px; overflow:hidden; aspect-ratio:3/3.6; box-shadow:0 40px 70px -32px rgba(58,32,32,.32); }
+  .sig-img img{ width:100%; height:100%; object-fit:cover; }
+  .sig-text h2{ font-size:clamp(28px,3.2vw,42px); color:var(--cocoa); margin:14px 0 22px; font-weight:600; line-height:1.15;}
+  .sig-text p.body{ font-size:16px; line-height:1.8; color:rgba(36,23,23,.68); margin:0 0 34px; max-width:480px; }
+  .sig-steps{ display:flex; flex-direction:column; gap:18px; margin-bottom:36px; }
+  .sig-step{ display:flex; gap:18px; align-items:baseline; border-top:1px solid var(--hair); padding-top:18px; }
+  .sig-step:first-child{ border-top:none; padding-top:0; }
+  .sig-num{ font-family:'Playfair Display',serif; color:var(--gold); font-size:15px; font-weight:600; flex:none; width:34px; }
+  .sig-step h4{ margin:0; font-size:15.5px; font-weight:700; color:var(--cocoa); }
+
+  /* ---------- CUSTOM BUILDER ---------- */
+  .builder{
+    background:var(--cocoa); border-radius:32px; padding:64px; color:var(--cream); position:relative; overflow:hidden;
+  }
+  .builder::before{
+    content:""; position:absolute; inset:0;
+    background: radial-gradient(circle at 85% 12%, rgba(214,179,106,.18), transparent 42%);
+    pointer-events:none;
+  }
+  .builder-top{ max-width:600px; margin-bottom:48px; position:relative; }
+  .builder-top .eyebrow{ color:var(--gold); }
+  .builder-top h2{ color:var(--cream); font-size:clamp(28px,3.2vw,40px); margin:12px 0 16px; font-weight:600; }
+  .builder-top p{ color:rgba(255,248,240,.7); font-size:15.5px; line-height:1.7; margin:0; }
+  .builder-groups{ display:grid; grid-template-columns:repeat(3,1fr); gap:40px; position:relative; margin-bottom:44px; }
+  .builder-group label.gh{ font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:var(--gold); font-weight:700; display:block; margin-bottom:16px; }
+  .chip-row{ display:flex; flex-wrap:wrap; gap:10px; }
+  .chip{
+    padding:9px 16px; border-radius:999px; border:1px solid rgba(255,248,240,.28); font-size:13px; cursor:pointer;
+    transition:all .25s ease; color:rgba(255,248,240,.85); background:transparent;
+  }
+  .chip:hover{ border-color:var(--gold); }
+  .chip.active{ background:var(--gold); border-color:var(--gold); color:var(--cocoa); font-weight:600; }
+  .builder-foot{ position:relative; display:flex; align-items:center; gap:20px; flex-wrap:wrap; }
+
+  /* ---------- OCCASIONS ---------- */
+  .occ-grid{ display:grid; grid-template-columns:repeat(6,1fr); gap:20px; }
+  .occ-card{
+    position:relative; border-radius:20px; overflow:hidden; aspect-ratio:3/4; cursor:pointer;
+  }
+  .occ-card img{ width:100%; height:100%; object-fit:cover; transition:transform .6s ease; }
+  .occ-card::after{
+    content:""; position:absolute; inset:0; background:linear-gradient(180deg, rgba(58,32,32,0) 40%, rgba(36,23,23,.78) 100%);
+    transition:background .4s ease;
+  }
+  .occ-card:hover img{ transform:scale(1.12); }
+  .occ-card:hover::after{ background:linear-gradient(180deg, rgba(58,32,32,.15) 20%, rgba(36,23,23,.9) 100%); }
+  .occ-label{
+    position:absolute; left:16px; bottom:16px; color:var(--cream); z-index:2; transition:transform .4s ease;
+  }
+  .occ-card:hover .occ-label{ transform:translateY(-4px); }
+  .occ-label .em{ font-size:20px; display:block; margin-bottom:4px; }
+  .occ-label span.name{ font-family:'Playfair Display',serif; font-size:15px; font-weight:600; }
+
+  /* ---------- GALLERY ---------- */
+  .gallery-grid{
+    column-count:4; column-gap:18px;
+  }
+  .gallery-grid img{
+    width:100%; margin-bottom:18px; border-radius:16px; break-inside:avoid;
+    transition:transform .5s ease, filter .5s ease; cursor:pointer;
+  }
+  .gallery-grid img:hover{ transform:scale(1.02); filter:brightness(1.04); }
+  .gallery-cta{ text-align:center; margin-top:44px; }
+  .gallery-cta .handle{ font-family:'Playfair Display',serif; color:var(--gold); font-size:18px; margin-bottom:16px; }
+
+  /* ---------- TESTIMONIALS ---------- */
+  .test-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:26px; }
+  .test-card{
+    background:var(--cream); border-radius:22px; padding:32px 28px; border:1px solid var(--hair);
+    display:flex; flex-direction:column; gap:18px;
+  }
+  .test-card .stars{ font-size:13px; }
+  .test-card p{ font-size:15px; line-height:1.7; margin:0; color:var(--ink); font-style:italic; font-family:'Cormorant Garamond',serif; }
+  .test-who{ display:flex; align-items:center; gap:12px; margin-top:auto; }
+  .avatar{ width:42px; height:42px; border-radius:50%; overflow:hidden; flex:none; }
+  .avatar img{ width:100%; height:100%; object-fit:cover; }
+  .test-who .name{ font-weight:700; font-size:13.5px; color:var(--cocoa); }
+  .test-who .role{ font-size:11.5px; color:rgba(36,23,23,.55); }
+
+  /* ---------- OFFER ---------- */
+  .offer{
+    background:linear-gradient(120deg, var(--cocoa) 0%, #4a2a2a 100%);
+    border-radius:30px; padding:70px 60px; display:flex; align-items:center; justify-content:space-between; gap:40px;
+    position:relative; overflow:hidden;
+  }
+  .offer::after{
+    content:""; position:absolute; right:-60px; top:-60px; width:260px; height:260px; border-radius:50%;
+    background:radial-gradient(circle, rgba(232,166,161,.25), transparent 70%);
+  }
+  .offer-text{ position:relative; max-width:480px; }
+  .offer-text .eyebrow{ color:var(--rose); }
+  .offer-text h2{ color:var(--cream); font-size:clamp(26px,3vw,36px); margin:12px 0 12px; font-weight:600; }
+  .offer-text p{ color:rgba(255,248,240,.72); font-size:15px; margin:0; }
+
+  /* ---------- ABOUT ---------- */
+  .about-grid{ display:grid; grid-template-columns:1.1fr .9fr; gap:60px; align-items:center; }
+  .about-images{ position:relative; }
+  .about-img-main{ border-radius:24px; overflow:hidden; aspect-ratio:4/3.2; box-shadow:0 30px 60px -28px rgba(58,32,32,.3); }
+  .about-img-main img{ width:100%; height:100%; object-fit:cover; }
+  .about-img-small{
+    width:44%; border-radius:18px; overflow:hidden; position:absolute; right:-6%; bottom:-12%;
+    aspect-ratio:1/1.1; border:6px solid var(--bg); box-shadow:0 24px 44px -20px rgba(58,32,32,.35);
+  }
+  .about-img-small img{ width:100%; height:100%; object-fit:cover; }
+  .about-text h2{ font-size:clamp(28px,3.2vw,40px); color:var(--cocoa); margin:12px 0 20px; font-weight:600; }
+  .about-text p{ font-size:15.5px; line-height:1.85; color:rgba(36,23,23,.68); margin:0 0 36px; max-width:460px; }
+  .stat-row{ display:flex; gap:40px; flex-wrap:wrap; }
+  .stat h3{ font-family:'Playfair Display',serif; font-size:32px; color:var(--gold); margin:0; }
+  .stat span{ font-size:12.5px; text-transform:uppercase; letter-spacing:.05em; color:rgba(36,23,23,.55); }
+
+  /* ---------- NEWSLETTER ---------- */
+  .newsletter{ text-align:center; padding:90px 0; }
+  .newsletter h2{ font-size:clamp(26px,3vw,36px); color:var(--cocoa); margin:12px 0 14px; }
+  .newsletter p{ color:rgba(36,23,23,.6); margin:0 0 32px; }
+  .news-form{ display:flex; gap:12px; max-width:440px; margin:0 auto; }
+  .news-form input{
+    flex:1; padding:15px 20px; border-radius:999px; border:1px solid var(--hair); background:var(--cream);
+    font-family:'DM Sans',sans-serif; font-size:14px; outline:none; transition:border-color .3s ease;
+  }
+  .news-form input:focus{ border-color:var(--gold); }
+
+  /* ---------- FOOTER ---------- */
+  footer{ background:var(--cocoa); color:rgba(255,248,240,.75); padding:80px 0 30px; }
+  .foot-grid{ display:grid; grid-template-columns:1.4fr 1fr 1fr 1.1fr .8fr; gap:40px; padding-bottom:60px; border-bottom:1px solid rgba(255,248,240,.12); }
+  .foot-logo{ font-family:'Playfair Display',serif; color:var(--cream); font-size:22px; font-weight:600; margin-bottom:14px; }
+  .foot-tag{ font-size:13.5px; line-height:1.6; max-width:220px; }
+  .foot-col h5{ color:var(--cream); font-size:12.5px; text-transform:uppercase; letter-spacing:.08em; margin:0 0 18px; }
+  .foot-col a, .foot-col p{ display:block; font-size:13.5px; margin:0 0 12px; color:rgba(255,248,240,.7); transition:color .3s ease; }
+  .foot-col a:hover{ color:var(--gold); }
+  .foot-social{ display:flex; gap:12px; }
+  .foot-social a{
+    width:38px; height:38px; border-radius:50%; border:1px solid rgba(255,248,240,.22);
+    display:flex; align-items:center; justify-content:center; transition:all .3s ease;
+  }
+  .foot-social a:hover{ background:var(--gold); border-color:var(--gold); color:var(--cocoa); }
+  .foot-bottom{ display:flex; justify-content:space-between; padding-top:26px; font-size:12.5px; color:rgba(255,248,240,.5); flex-wrap:wrap; gap:10px; }
+
+  /* ---------- Mobile menu ---------- */
+  .mobile-menu{
+    position:fixed; inset:0; background:var(--cream); z-index:200; transform:translateX(100%);
+    transition:transform .45s cubic-bezier(.2,.7,.2,1); display:flex; flex-direction:column; padding:26px 28px;
+  }
+  .mobile-menu.open{ transform:translateX(0); }
+  .mobile-menu-top{ display:flex; justify-content:space-between; align-items:center; margin-bottom:50px; }
+  .mobile-links{ display:flex; flex-direction:column; gap:6px; }
+  .mobile-links a{ font-family:'Playfair Display',serif; font-size:26px; padding:14px 0; border-bottom:1px solid var(--hair); color:var(--cocoa); }
+  .mobile-actions{ margin-top:auto; display:flex; flex-direction:column; gap:14px; }
+
+  /* Sticky mobile order bar */
+  .mobile-order-bar{
+    display:none; position:fixed; left:16px; right:16px; bottom:16px; z-index:90;
+    background:var(--cocoa); color:var(--cream); border-radius:999px; padding:14px 22px;
+    align-items:center; justify-content:space-between; box-shadow:0 20px 40px -14px rgba(58,32,32,.5);
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width:1080px){
+    .product-grid{ grid-template-columns:repeat(2,1fr); }
+    .occ-grid{ grid-template-columns:repeat(3,1fr); }
+    .gallery-grid{ column-count:3; }
+    .strip-grid{ grid-template-columns:repeat(2,1fr); row-gap:26px;}
+    .builder-groups{ grid-template-columns:1fr; gap:30px; }
+    .foot-grid{ grid-template-columns:1fr 1fr; row-gap:40px; }
+  }
+  @media (max-width:860px){
+    .nav-center{ display:none; }
+    .hamburger{ display:flex; }
+    .hero-grid{ grid-template-columns:1fr; gap:44px; }
+    .hero-visual{ order:-1; }
+    .hero p.lead{ max-width:100%; }
+    .rating-card{ left:14px; bottom:-24px; }
+    .signature{ grid-template-columns:1fr; gap:40px; }
+    .sig-img{ order:-1; aspect-ratio:16/11; }
+    .about-grid{ grid-template-columns:1fr; }
+    .about-img-small{ right:6%; }
+    .offer{ flex-direction:column; text-align:center; padding:50px 30px; }
+    .offer-text{ max-width:100%; }
+    .section{ padding:74px 0; }
+    .builder{ padding:40px 24px; }
+    .gallery-grid{ column-count:2; }
+    .test-grid{ grid-template-columns:1fr; }
+    .mobile-order-bar{ display:flex; }
+  }
+  @media (max-width:600px){
+    .wrap{ padding:0 20px; }
+    .product-grid{ grid-template-columns:1fr; }
+    .occ-grid{ grid-template-columns:repeat(2,1fr); }
+    .strip-grid{ grid-template-columns:1fr; }
+    .foot-grid{ grid-template-columns:1fr; row-gap:34px; }
+    .news-form{ flex-direction:column; }
+    .hero h1{ font-size:38px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ================= NAV ================= -->
+<nav class="nav" id="nav">
+  <div class="wrap nav-inner">
+    <a href="#home" class="logo">Sweet Crumb <span class="dot">Atelier</span></a>
+    <div class="nav-center">
+      <a href="#home">Home</a>
+      <a href="#cakes">Cakes</a>
+      <a href="#builder">Custom Cakes</a>
+      <a href="#about">About</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div class="nav-right">
+      <span class="icon-btn" data-icon="search" style="display:flex"></span>
+      <span class="icon-btn" style="display:flex; position:relative;">
+        <span data-icon="shopping-bag"></span>
+        <span class="cart-badge" id="cartCount">0</span>
+      </span>
+      <a href="#builder" class="btn btn-primary btn-sm" style="display:inline-flex">Order Now</a>
+      <div class="hamburger icon-btn" id="hamOpen"><span data-icon="menu"></span></div>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mobile-menu-top">
+    <a href="#home" class="logo">Sweet Crumb <span class="dot">Atelier</span></a>
+    <div class="icon-btn" id="hamClose"><span data-icon="x"></span></div>
+  </div>
+  <div class="mobile-links">
+    <a href="#home">Home</a>
+    <a href="#cakes">Cakes</a>
+    <a href="#builder">Custom Cakes</a>
+    <a href="#about">About</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <div class="mobile-actions">
+    <a href="#builder" class="btn btn-primary">Order Now</a>
+  </div>
+</div>
+
+<!-- ================= HERO ================= -->
+<section class="hero" id="home">
+  <div class="wrap hero-grid">
+    <div class="reveal">
+      <div class="eyebrow">Handcrafted With Love</div>
+      <h1>Cakes Made for<br><em>Moments</em> Worth Celebrating.</h1>
+      <p class="lead">Beautifully handcrafted cakes, made with premium ingredients and a little extra love for your unforgettable moments.</p>
+      <div class="hero-actions">
+        <a href="#cakes" class="btn btn-primary">Explore Cakes</a>
+        <a href="#builder" class="btn btn-outline">Create Your Cake</a>
+      </div>
+    </div>
+    <div class="hero-visual reveal">
+      <div class="hero-img-frame">
+        <img src="https://loremflickr.com/900/1050/cake,celebration?lock=101" alt="Elegant decorated celebration cake with soft frosting details">
+      </div>
+      <div class="rating-card">
+        <div class="stars">★★★★★</div>
+        <div class="big">4.9/5 Customer Rating</div>
+        <div class="small">2,000+ Happy Customers</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= TRUST STRIP ================= -->
+<section class="strip">
+  <div class="wrap strip-grid">
+    <div class="strip-item"><span class="ic" data-icon="croissant"></span><div><h4>Freshly Baked</h4><p>Made fresh for every order</p></div></div>
+    <div class="strip-item"><span class="ic" data-icon="wheat"></span><div><h4>Premium Ingredients</h4><p>Only carefully selected ingredients</p></div></div>
+    <div class="strip-item"><span class="ic" data-icon="sparkles"></span><div><h4>Custom Designs</h4><p>Made uniquely for your celebration</p></div></div>
+    <div class="strip-item"><span class="ic" data-icon="truck"></span><div><h4>On-Time Delivery</h4><p>Reliable delivery for your special day</p></div></div>
+  </div>
+</section>
+
+<!-- ================= FEATURED CAKES ================= -->
+<section class="section" id="cakes">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Bestsellers</div>
+      <h2>A Little Something Sweet</h2>
+      <p>Discover our most-loved creations, handcrafted for every kind of celebration.</p>
+    </div>
+    <div class="product-grid" id="productGrid"></div>
+  </div>
+</section>
+
+<!-- ================= SIGNATURE EXPERIENCE ================= -->
+<section class="section" style="padding-top:0;">
+  <div class="wrap signature reveal">
+    <div class="sig-img">
+      <img src="https://loremflickr.com/700/840/cake,frosting?lock=202" alt="Close-up of cake frosting detail">
+    </div>
+    <div class="sig-text">
+      <div class="eyebrow">The Sweet Crumb Experience</div>
+      <h2>More Than a Cake.<br>It's Your Moment.</h2>
+      <p class="body">Every cake we create is handcrafted with attention to flavor, texture, design and presentation — because your celebration deserves nothing less than a centerpiece made just for it.</p>
+      <div class="sig-steps">
+        <div class="sig-step"><span class="sig-num">01</span><h4>Choose Your Flavor</h4></div>
+        <div class="sig-step"><span class="sig-num">02</span><h4>Personalize Your Design</h4></div>
+        <div class="sig-step"><span class="sig-num">03</span><h4>Celebrate Your Way</h4></div>
+      </div>
+      <a href="#builder" class="btn btn-primary">Start Your Custom Order</a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CUSTOM CAKE BUILDER ================= -->
+<section class="section" id="builder">
+  <div class="wrap">
+    <div class="builder reveal">
+      <div class="builder-top">
+        <div class="eyebrow">Made Just For You</div>
+        <h2>Dream It. We'll Bake It.</h2>
+        <p>Have something special in mind? Tell us what you imagine and we'll turn your idea into a beautiful edible creation.</p>
+      </div>
+      <div class="builder-groups">
+        <div class="builder-group">
+          <label class="gh">Cake Size</label>
+          <div class="chip-row" data-group="size">
+            <span class="chip">1 lb</span><span class="chip">2 lb</span><span class="chip">3 lb</span><span class="chip">4 lb</span><span class="chip">5 lb+</span>
+          </div>
+        </div>
+        <div class="builder-group">
+          <label class="gh">Flavor</label>
+          <div class="chip-row" data-group="flavor">
+            <span class="chip">Chocolate</span><span class="chip">Vanilla</span><span class="chip">Red Velvet</span><span class="chip">Strawberry</span><span class="chip">Black Forest</span><span class="chip">Pistachio</span><span class="chip">Coffee</span>
+          </div>
+        </div>
+        <div class="builder-group">
+          <label class="gh">Occasion</label>
+          <div class="chip-row" data-group="occasion">
+            <span class="chip">Birthday</span><span class="chip">Wedding</span><span class="chip">Anniversary</span><span class="chip">Graduation</span><span class="chip">Baby Shower</span><span class="chip">Corporate</span><span class="chip">Just Because</span>
+          </div>
+        </div>
+      </div>
+      <div class="builder-foot">
+        <a href="#contact" class="btn btn-gold" id="customCtaBtn">Request a Custom Cake</a>
+        <span style="font-size:13px; color:rgba(255,248,240,.55);" id="builderSummary">Select your size, flavor &amp; occasion above.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= OCCASIONS ================= -->
+<section class="section">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Every Milestone</div>
+      <h2>Made for Every Celebration</h2>
+    </div>
+    <div class="occ-grid reveal" id="occGrid"></div>
+  </div>
+</section>
+
+<!-- ================= GALLERY ================= -->
+<section class="section" id="gallery">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Follow Along</div>
+      <h2>Sweet Moments</h2>
+    </div>
+    <div class="gallery-grid reveal" id="galleryGrid"></div>
+    <div class="gallery-cta reveal">
+      <div class="handle">@sweetcrumbatelier</div>
+      <a href="#" class="btn btn-outline">Follow Our Sweet Journey</a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= TESTIMONIALS ================= -->
+<section class="section" style="padding-top:0;">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Kind Words</div>
+      <h2>Made With Love, Loved by You</h2>
+    </div>
+    <div class="test-grid reveal">
+      <div class="test-card">
+        <div class="stars">★★★★★</div>
+        <p>"The cake looked absolutely beautiful and tasted even better. Everyone at the party asked where it came from!"</p>
+        <div class="test-who">
+          <div class="avatar"><img src="https://i.pravatar.cc/100?img=47" alt="Portrait of Nadia Rahman"></div>
+          <div><div class="name">Nadia Rahman</div><div class="role">Birthday Order</div></div>
+        </div>
+      </div>
+      <div class="test-card">
+        <div class="stars">★★★★★</div>
+        <p>"Sweet Crumb Atelier turned my simple idea into the perfect birthday cake. The design was even better than I imagined."</p>
+        <div class="test-who">
+          <div class="avatar"><img src="https://i.pravatar.cc/100?img=12" alt="Portrait of Arif Hasan"></div>
+          <div><div class="name">Arif Hasan</div><div class="role">Custom Order</div></div>
+        </div>
+      </div>
+      <div class="test-card">
+        <div class="stars">★★★★★</div>
+        <p>"From the first message to the final slice, everything felt thoughtful. Our wedding cake was the talk of the evening."</p>
+        <div class="test-who">
+          <div class="avatar"><img src="https://i.pravatar.cc/100?img=32" alt="Portrait of Farhana Islam"></div>
+          <div><div class="name">Farhana Islam</div><div class="role">Wedding Order</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= OFFER ================= -->
+<section class="section" style="padding-top:0;">
+  <div class="wrap">
+    <div class="offer reveal">
+      <div class="offer-text">
+        <div class="eyebrow">Limited Time</div>
+        <h2>Make Their Birthday Extra Sweet</h2>
+        <p>Get 10% off your first custom cake order.</p>
+      </div>
+      <a href="#builder" class="btn btn-gold">Claim Your Sweet Deal</a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ABOUT ================= -->
+<section class="section" id="about">
+  <div class="wrap about-grid">
+    <div class="about-images reveal">
+      <div class="about-img-main">
+        <img src="https://loremflickr.com/800/640/bakery,pastry?lock=303" alt="Interior of the Sweet Crumb Atelier bakery">
+      </div>
+      <div class="about-img-small">
+        <img src="https://loremflickr.com/420/460/baker,chef?lock=304" alt="Portrait of the Sweet Crumb Atelier founder and baker">
+      </div>
+    </div>
+    <div class="about-text reveal">
+      <div class="eyebrow">Our Story</div>
+      <h2>A Small Bakery With a Big Heart</h2>
+      <p>Sweet Crumb Atelier began with a simple belief: every celebration deserves something beautiful at the center of the table. From our kitchen to your celebration, every cake is thoughtfully crafted using quality ingredients, creative designs and plenty of love.</p>
+      <div class="stat-row">
+        <div class="stat"><h3>2,000+</h3><span>Cakes Baked</span></div>
+        <div class="stat"><h3>4.9/5</h3><span>Average Rating</span></div>
+        <div class="stat"><h3>5+ Yrs</h3><span>Years of Craft</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= NEWSLETTER ================= -->
+<section class="newsletter">
+  <div class="wrap reveal">
+    <div class="eyebrow" style="justify-content:center;">Stay Sweet</div>
+    <h2>A Little Sweetness in Your Inbox</h2>
+    <p>Get new cake designs, seasonal treats and special offers.</p>
+    <form class="news-form" onsubmit="event.preventDefault(); this.querySelector('button').textContent='Subscribed ✓';">
+      <input type="email" placeholder="Enter your email" required>
+      <button type="submit" class="btn btn-primary" style="border-radius:999px;">Subscribe</button>
+    </form>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer id="contact">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="foot-logo">Sweet Crumb Atelier</div>
+        <p class="foot-tag">Baked for Your Beautiful Moments.</p>
+        <div class="foot-social">
+          <a href="#" aria-label="Instagram"><span data-icon="instagram" style="width:16px;height:16px;"></span></a>
+          <a href="#" aria-label="Facebook"><span data-icon="facebook" style="width:16px;height:16px;"></span></a>
+          <a href="#" aria-label="TikTok"><span data-icon="music-2" style="width:16px;height:16px;"></span></a>
+        </div>
+      </div>
+      <div class="foot-col">
+        <h5>Explore</h5>
+        <a href="#home">Home</a>
+        <a href="#cakes">Cakes</a>
+        <a href="#builder">Custom Cakes</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#about">About</a>
+      </div>
+      <div class="foot-col">
+        <h5>Help</h5>
+        <a href="#contact">Contact</a>
+        <a href="#contact">Delivery</a>
+        <a href="#contact">FAQ</a>
+        <a href="#contact">Order Tracking</a>
+      </div>
+      <div class="foot-col">
+        <h5>Contact</h5>
+        <p>+880 1XXX-XXXXXX</p>
+        <p>hello@sweetcrumbatelier.com</p>
+        <p>Tue–Sun, 10am – 8pm</p>
+      </div>
+      <div class="foot-col">
+        <h5>Social</h5>
+        <a href="#">Instagram</a>
+        <a href="#">Facebook</a>
+        <a href="#">TikTok</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Sweet Crumb Atelier. All rights reserved.</span>
+      <span>Dhaka, Bangladesh</span>
+    </div>
+  </div>
+</footer>
+
+<!-- Sticky mobile order bar -->
+<div class="mobile-order-bar" id="mobileOrderBar">
+  <span style="font-family:'Playfair Display',serif; font-size:14px;">Ready to order?</span>
+  <a href="#builder" class="btn btn-gold btn-sm" style="display:inline-flex">Order Now</a>
+</div>
+
+<script>
+  // ---------- Icons ----------
+  lucide.createIcons();
+
+  // ---------- Nav scroll state ----------
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+  }, { passive:true });
+
+  // ---------- Mobile menu ----------
+  const mobileMenu = document.getElementById('mobileMenu');
+  document.getElementById('hamOpen').addEventListener('click', () => mobileMenu.classList.add('open'));
+  document.getElementById('hamClose').addEventListener('click', () => mobileMenu.classList.remove('open'));
+  mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileMenu.classList.remove('open')));
+
+  // ---------- Reveal on scroll ----------
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold:.15 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // ---------- Cart ----------
+  let cartCount = 0;
+  const cartBadge = document.getElementById('cartCount');
+  function addToCart(){ cartCount++; cartBadge.textContent = cartCount; }
+
+  // ---------- Products ----------
+  const products = [
+    { name:"Chocolate Velvet", desc:"Rich chocolate cake with silky chocolate ganache.", price:"৳1,850", img:"https://loremflickr.com/560/560/chocolate,cake?lock=1", rating:"4.9" },
+    { name:"Strawberry Dream", desc:"Vanilla sponge, fresh strawberries and cream.", price:"৳1,650", img:"https://loremflickr.com/560/560/strawberry,cake?lock=2", rating:"4.8" },
+    { name:"Classic Red Velvet", desc:"Velvety cocoa sponge with cream cheese frosting.", price:"৳1,750", img:"https://loremflickr.com/560/560/redvelvet,cake?lock=3", rating:"4.9" },
+    { name:"Pistachio Rose", desc:"Pistachio sponge with rose-infused cream.", price:"৳2,100", img:"https://loremflickr.com/560/560/pistachio,cake?lock=4", rating:"5.0" },
+  ];
+  const productGrid = document.getElementById('productGrid');
+  productGrid.innerHTML = products.map((p,i) => `
+    <div class="card">
+      <div class="card-img">
+        <img src="${p.img}" alt="${p.name} — ${p.desc}" loading="lazy">
+        <div class="fav" onclick="this.classList.toggle('active')"><span data-icon="heart" style="width:16px;height:16px;"></span></div>
+      </div>
+      <div class="card-body">
+        <div class="card-top">
+          <h3>${p.name}</h3>
+          <span class="card-rate">★ ${p.rating}</span>
+        </div>
+        <p>${p.desc}</p>
+        <div class="card-foot">
+          <span class="price">${p.price}</span>
+          <button class="add-btn" onclick="addToCart()"><span data-icon="shopping-bag" style="width:13px;height:13px;"></span>Add</button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+  lucide.createIcons();
+
+  // ---------- Occasions ----------
+  const occasions = [
+    { emoji:"🎂", name:"Birthday", tag:"birthday,cake" },
+    { emoji:"💍", name:"Wedding", tag:"wedding,cake" },
+    { emoji:"❤️", name:"Anniversary", tag:"anniversary,cake" },
+    { emoji:"🎓", name:"Graduation", tag:"graduation,cake" },
+    { emoji:"👶", name:"Baby Shower", tag:"babyshower,cake" },
+    { emoji:"🎉", name:"Celebration", tag:"party,cake" },
+  ];
+  document.getElementById('occGrid').innerHTML = occasions.map((o,i) => `
+    <a href="#builder" class="occ-card">
+      <img src="https://loremflickr.com/420/560/${o.tag}?lock=${10+i}" alt="${o.name} cake" loading="lazy">
+      <div class="occ-label"><span class="em">${o.emoji}</span><span class="name">${o.name}</span></div>
+    </a>
+  `).join('');
+
+  // ---------- Gallery ----------
+  const galleryTags = ["birthday,cake","wedding,cake","cupcakes","dessert,box","cake,slice","bakery,baking","cake,flowers","cupcake,celebration","cake,table"];
+  document.getElementById('galleryGrid').innerHTML = galleryTags.map((t,i) => `
+    <img src="https://loremflickr.com/500/${560 + (i%3)*80}/${t}?lock=${20+i}" alt="${t.replace(',', ' ')} photo" loading="lazy">
+  `).join('');
+
+  // ---------- Custom cake builder ----------
+  const state = { size:null, flavor:null, occasion:null };
+  document.querySelectorAll('.chip-row').forEach(row => {
+    const group = row.dataset.group;
+    row.querySelectorAll('.chip').forEach(chip => {
+      chip.addEventListener('click', () => {
+        row.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+        chip.classList.add('active');
+        state[group] = chip.textContent;
+        updateSummary();
+      });
+    });
+  });
+  function updateSummary(){
+    const s = document.getElementById('builderSummary');
+    const parts = [state.size, state.flavor, state.occasion].filter(Boolean);
+    s.textContent = parts.length ? `Your pick: ${parts.join(' · ')}` : 'Select your size, flavor & occasion above.';
+  }
+
+  // ---------- Floating petals in hero ----------
+  const heroVisual = document.querySelector('.hero-visual');
+  const emojis = ['✿','❀'];
+  for(let i=0;i<3;i++){
+    const p = document.createElement('span');
+    p.className = 'petal';
+    p.textContent = emojis[i % emojis.length];
+    p.style.cssText = `right:${8+i*10}%; top:${10+i*22}%; font-size:${20+i*6}px; color:#D6B36A; animation-delay:${i*0.7}s;`;
+    heroVisual.appendChild(p);
+  }
+</script>
+</body>
+</html>
